@@ -1,4 +1,4 @@
-user = User.create!(first_name: "Tim", last_name: "Brasnford", email: "asdf@asdf.com", 
+user = User.create!(first_name: "Tim", last_name: "Bransford", email: "timothybransford@gmail.com", 
                     password: "asdfasdf", password_confirmation: "asdfasdf")
 
 100.times do |post|
