@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates_presence_of :first_name, :last_name
 
   def full_name_last_first
-    last_name + ", " + first_name
+    last_name.upcase + ", " + first_name.upcase
   end
 
   def full_name
