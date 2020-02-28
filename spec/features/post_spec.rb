@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 context 'navigate' do
+
   before do
     @user = FactoryBot.create(:user)
     login_as(@user, :scope => :user)
   end
 
   describe 'index' do
+
     before do
       visit posts_path
     end
@@ -26,9 +28,11 @@ context 'navigate' do
       expect(page).to have_content(post1.rationale)
       expect(page).to have_content(post2.rationale)
     end
+
   end
 
   describe "creation" do
+
     before do
       visit new_post_path
     end
@@ -52,6 +56,27 @@ context 'navigate' do
 
       expect(@user.posts.last.rationale).to eq("User_Association")
     end
+  end
+
+  describe "edit" do
+
+    before do
+      @post = FactoryBot.create(:post, user_id:@user.id)
+      visit posts_path
+      click_link "Edit"
+    end
+    
+    it "can be reached by clicking edit on index page" do
+      expect(page.status_code).to eq(200)
+      expect(page).to have_content("Edit Time Entry")
+    end
+
+    it "has the correct post to edit" do
+      expect(page).to have_content(@post.rationale)
+    end
+
+    it "updates content" 
+
   end
 
 end

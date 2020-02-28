@@ -20,8 +20,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    set_post
+  end
+
   def show
-    @post = Post.find(params[:id])
+    set_post
   end
   
   private
@@ -30,7 +34,10 @@ class PostsController < ApplicationController
     params.require(:post).permit(:date, :rationale)
   end
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
+  private
+  
+    def set_post
+      @post = Post.find(params[:id])
+    end
+
 end
