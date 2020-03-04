@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show]
+  before_action :set_post, only: [:show, :edit, :update]
 
   def index
     @posts = Post.all
@@ -14,18 +14,24 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     
     if @post.save
-      redirect_to @post
+      redirect_to @post, notice: "Your post was successfully created."
     else
       render new_post_path
     end
   end
 
   def edit
-    set_post
+  end
+
+  def update
+    if(@post.update(post_params))
+      redirect_to @post, notice: "Your post was succesfully updated."
+    else
+      redirect_to edit_post_path, id: @post.id
+    end
   end
 
   def show
-    set_post
   end
   
   private

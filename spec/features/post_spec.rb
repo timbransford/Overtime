@@ -63,7 +63,7 @@ context 'navigate' do
     before do
       @post = FactoryBot.create(:post, user_id:@user.id)
       visit posts_path
-      click_link "Edit"
+      click_link "edit_#{@post.id}"
     end
     
     it "can be reached by clicking edit on index page" do
@@ -75,7 +75,13 @@ context 'navigate' do
       expect(page).to have_content(@post.rationale)
     end
 
-    it "updates content" 
+    it "updates content" do
+      fill_in 'post[rationale]', with: "Changed Rationale"
+      click_on "Save"
+
+      expect(page).to have_content("Changed Rationale")
+    end
+
 
   end
 
