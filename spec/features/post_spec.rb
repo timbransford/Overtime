@@ -58,6 +58,21 @@ context 'navigate' do
     end
   end
 
+  describe "new" do
+    before do
+      visit root_path
+      click_link "new_post_from_nav"
+    end
+
+    it "has a link from home page" do
+      expect(page.status_code).to eq(200)
+    end
+    
+    it "has proper header" do
+      expect(page).to have_content("New Time Entry")
+    end
+  end
+
   describe "edit" do
 
     before do
