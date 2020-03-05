@@ -97,6 +97,19 @@ context 'navigate' do
       expect(page).to have_content("Changed Rationale")
     end
 
+  end
+
+  describe "delete" do
+      
+    before do
+      @post = FactoryBot.create(:post, user_id:@user.id)
+      visit posts_path
+      click_link "delete_post_from_index_#{@post.id}"
+    end
+    
+    it "can be deleted" do
+      expect(page).not_to have_content("A rationale")
+    end
 
   end
 
